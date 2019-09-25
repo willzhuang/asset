@@ -1,0 +1,46 @@
+## for ubuntu ##
+
+## step 1. compile smart contract ##
+
+snap install solc
+
+➜  contracts solc Asset.sol --overwrite --bin --abi --optimize -o ../build/solc/
+Compiler run successful. Artifact(s) can be found in directory ../build/solc/.
+
+➜  contracts solc UpgradeabilityProxy.sol --overwrite --bin --abi --optimize -o ../build/solc/
+Compiler run successful. Artifact(s) can be found in directory ../build/solc/.
+
+
+## step 2.  generate java class ##
+
+➜  asset ./script/web3j-4.5.4/bin/web3j solidity generate -b ./build/solc/Asset.bin -a ./build/solc/Asset.abi -o ./src/main/java/com/chain -p com.chain.erc721
+
+              _      _____ _     _
+             | |    |____ (_)   (_)
+__      _____| |__      / /_     _   ___
+\ \ /\ / / _ \ '_ \     \ \ |   | | / _ \
+ \ V  V /  __/ |_) |.___/ / | _ | || (_) |
+  \_/\_/ \___|_.__/ \____/| |(_)|_| \___/
+                         _/ |
+                        |__/
+
+Generating erc721.Asset ... File written to ./src/main/java/com/chain
+
+
+➜  asset ./script/web3j-4.5.4/bin/web3j solidity generate -b ./build/solc/UpgradeabilityProxy.bin -a ./build/solc/UpgradeabilityProxy.abi -o ./src/main/java/com/chain -p erc721
+
+              _      _____ _     _
+             | |    |____ (_)   (_)
+__      _____| |__      / /_     _   ___
+\ \ /\ / / _ \ '_ \     \ \ |   | | / _ \
+ \ V  V /  __/ |_) |.___/ / | _ | || (_) |
+  \_/\_/ \___|_.__/ \____/| |(_)|_| \___/
+                         _/ |
+                        |__/
+
+Generating com.chain.erc721.UpgradeabilityProxy ... File written to ./src/main/java/com/chain
+
+
+## readme ##
+json files in ./build/contracts are created by truffle;
+abi and bin files in ./build/solc are created by solc;
